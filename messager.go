@@ -15,7 +15,7 @@ func PushMessage(event *linebot.Event, bot *linebot.Client) {
 	// 	print(err)
 	// }
 	// yesBtn := linebot.NewMessageAction("left", "left clicked")
-	yesBtn := linebot.NewMessageTemplateAction("yes", "我願意加入")
+	yesBtn := linebot.NewMessageAction("我願意", "[yes]")
 	butTemplate := linebot.NewButtonsTemplate(
 		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxbYZs9-LkRScXKWthdxw8gwUDUBkG34q0DgZnkI1pOkfybDx-",
 		"來註冊成為我們的會員吧！",
