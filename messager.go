@@ -11,9 +11,9 @@ func init() {
 	log.Println("Messager is camming...")
 }
 
-//PushMessage 輸出訊息用
-func PushMessage(UserId string, bot *linebot.Client) {
-	text := fmt.Sprintf("[%v][yes]", UserId)
+//PushMessage 詢問是否要加入會員
+func PushMessage(UserID string, bot *linebot.Client) {
+	text := fmt.Sprintf("[%v][yes]", UserID)
 	yesBtn := linebot.NewPostbackAction("我願意", text, "", "")
 	butTemplate := linebot.NewButtonsTemplate(
 		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxbYZs9-LkRScXKWthdxw8gwUDUBkG34q0DgZnkI1pOkfybDx-",
@@ -21,7 +21,16 @@ func PushMessage(UserId string, bot *linebot.Client) {
 		"有跟我一起買Spotify的夥伴就來成為會員吧",
 		yesBtn)
 	message := linebot.NewTemplateMessage("Sorry :(, please update your app.", butTemplate)
-	_, err := bot.PushMessage(UserId, message).Do()
+	_, err := bot.PushMessage(UserID, message).Do()
+	if err != nil {
+		print(err)
+	}
+}
+
+//PushMessageSay 可以藉由他講出你想講的話
+func PushMessageSay(UserID string, bot *linebot.Client, say string) {
+	message := linebot.NewTextMessage(say)
+	_, err := bot.PushMessage(UserID, message).Do()
 	if err != nil {
 		print(err)
 	}
